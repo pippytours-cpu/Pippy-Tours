@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pippy Tours | Excursões Privadas e Transfers na Ilha do Sal</title>
+    <style>
+        :root {
+            --primary: #00a896;
+            --secondary: #f39c12;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        header { background: linear-gradient(135deg, var(--primary), #028090); color: white; padding: 40px 20px; text-align: center; position: relative; }
+        .admin-btn { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; font-size: 12px; }
+        .hero { padding: 40px 20px; text-align: center; background: white; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .hero h2 { font-size: 24px; color: var(--secondary); margin-bottom: 10px; }
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid var(--primary); display: flex; flex-direction: column; justify-content: space-between; }
+        .card.eco { border-top-color: #2ecc71; }
+        .card h3 { margin-bottom: 15px; color: var(--dark); }
+        .price { font-size: 22px; font-weight: bold; color: var(--primary); margin: 5px 0; }
+        .btn { display: inline-block; background: var(--secondary); color: white; padding: 10px 20px; text-align: center; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 15px; transition: 0.3s; border: none; cursor: pointer; }
+        .btn:hover { background: #e67e22; }
+        .btn-whatsapp { background: #25d366; }
+        .btn-whatsapp:hover { background: #128c7e; }
+        .gallery { background: white; padding: 30px 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
+        .gallery-item { position: relative; overflow: hidden; border-radius: 6px; height: 200px; background: #ddd; }
+        .gallery-item img, .gallery-item video { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-title { position: absolute; bottom: 0; background: rgba(0,0,0,0.7); color: white; width: 100%; padding: 5px; text-align: center; font-size: 14px; }
+        footer { background: var(--dark); color: white; text-align: center; padding: 30px; margin-top: 40px; }
+        #admin-panel { display: none; background: #eee; padding: 20px; border: 1px solid #ccc; margin: 20px auto; max-width: 600px; border-radius: 8px; }
+        #admin-panel input, #admin-panel select { width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="admin-btn" onclick="toggleAdmin()">⚙️ Painel do Administrador</button>
+        <h1 id="site-title">Pippy Tours</h1>
+        <p id="site-slogan" style="font-style: italic; margin-top: 10px; font-size: 18px;">"Viaja em conforto, segurança e experiência inesquecível agora faz melhor."</p>
+    </header>
+
+    <div id="admin-panel">
+        <h3>Painel de Edição (Adicionar Foto/Vídeo)</h3>
+        <label>Tipo de Mídia:</label>
+        <select id="media-type">
+            <option value="image">Imagem (URL)</option>
+            <option value="video">Vídeo (URL)</option>
+        </select>
+        <label>Link da Mídia:</label>
+        <input type="text" id="media-url" placeholder="https://exemplo.com/foto.jpg ou video.mp4">
+        <label>Legenda / Ponto Turístico:</label>
+        <input type="text" id="media-caption" placeholder="Ex: Olho Azul, Pedra de Lume">
+        <button class="btn" onclick="addMedia()">Postar no Site</button>
+    </div>
+
+    <div class="hero">
+        <h2>Eco-Turismo Inteligente na Ilha do Sal 🌍⚡</h2>
+        <p>Explore as belezas de Cabo Verde a bordo da nossa <strong>picape 100% Elétrica de última geração</strong>. Viagens confortáveis, seguras e com <strong>zero emissões de combustão</strong>. Protegemos o ambiente enquanto criamos memórias inesquecíveis com você!</p>
+    </div>
+
+    <div class="container">
+        <h2 style="margin-bottom: 20px; text-align: center;">Nossos Serviços</h2>
+        
+        <div class="grid">
+            <!-- Transfers -->
+            <div class="card">
+                <div>
+                    <h3>Transfers Privados 🛬</h3>
+                    <p>Trajeto personalizado direto do Aeroporto para o seu Hotel ou Residência. Conforto garantido para até 4 passageiros por veículo.</p>
+                    <div class="price">☀️ Diurno: 20€ <span style="font-size:12px; color:#777;">(07:00 - 19:00)</span></div>
+                    <div class="price">🌙 Noturno: 25€ <span style="font-size:12px; color:#777;">(19:00 - 07:00)</span></div>
+                    <div class="price">🔄 Ida e Volta: 40€ <span style="font-size:12px; color:#777;">(Dia ou Noite)</span></div>
+                </div>
+                <a href="https://wa.me/2389308976?text=Olá,%20gostaria%20de%20reservar%20um%20Transfer%20com%20a%20Pippy%20Tours" target="_blank" class="btn btn-whatsapp">Reservar via WhatsApp</a>
+            </div>
+
+            <!-- Excursões -->
+            <div class="card">
+                <div>
+                    <h3>Excursões Privadas (Roteiro Flexível) 🗺️</h3>
+                    <p>Descubra os segredos da ilha no seu próprio ritmo com atenção exclusiva.</p>
+                    <div class="price">🌟 Full-Day: 150€ <span style="font-size:12px; color:#777;">(Todos os pontos turísticos)</span></div>
+                    <div class="price">🌤️ Half-Day: 100€ <span style="font-size:12px; color:#777;">(Principais atrações)</span></div>
+                    <p style="font-size: 13px; color: #555; margin-top: 10px;">*Capacidade máxima de até 4 passageiros por passeio.</p>
+                </div>
+                <a href="mailto:pippytours@gmail.com?subject=Reserva%20Excursão%20-%20Pippy%20Tours&body=Olá,%20gostaria%20de%20solicitar%20uma%20reserva%20de%20Excursão%20Privada." class="btn" style="background-color: var(--dark);">Reservar por E-mail</a>
+            </div>
+
+            <!-- Rotas Especiais -->
+            <div class="card eco">
+                <div>
+                    <h3>Experiências Especiais 🦈</h3>
+                    <p>Vivências únicas e focadas nas atrações mais famosas e surpreendentes da Ilha do Sal.</p>
+                    <div class="price">🌊 Tubarões + Salinas: 70€</div>
+                    <div class="price">🦈 Só Rota do Tubarão: 50€</div>
+                </div>
+                <a href="https://wa.me/2389308976?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20rota%20dos%20tubarões" target="_blank" class="btn btn-whatsapp">Solicitar Informações</a>
+            </div>
+        </div>
+
+        <!-- Galeria de Fotos e Vídeos -->
+        <div class="gallery">
+            <h3>Atrações & Momentos Inesquecíveis</h3>
+            <p>Veja um pouco do que espera por você na Ilha do Sal:</p>
+            <div class="gallery-grid" id="dynamic-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=500" alt="Olho Azul">
+                    <div class="gallery-title">Olho Azul</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500" alt="Ponta Preta">
+                    <div class="gallery-title">Ponta Preta</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=500" alt="Salinas">
+                    <div class="gallery-title">Salinas</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Pippy Tours — Reservas & Contactos</strong></p>
+        <p>📱 WhatsApp: +238 9308976 | ✉️ E-mail: pippytours@gmail.com</p>
+        <p style="margin-top: 15px; font-size: 12px; color: #aaa;">© 2026 Pippy Tours. Protegendo o meio ambiente com 0% emissões.</p>
+    </footer>
+
+    <script>
+        function toggleAdmin() {
+            var panel = document.getElementById('admin-panel');
+            panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function addMedia() {
+            var type = document.getElementById('media-type').value;
+            var url = document.getElementById('media-url').value;
+            var caption = document.getElementById('media-caption').value;
+
+            if(!url || !caption) {
+                alert('Por favor, preencha todos os campos!');
+                return;
+            }
+
+            var gallery = document.getElementById('dynamic-gallery');
+            var item = document.createElement('div');
+            item.className = 'gallery-item';
+
+            if(type === 'image') {
+                item.innerHTML = '<img src="' + url + '" alt="' + caption + '"><div class="gallery-title">' + caption + '</div>';
+            } else {
+                item.innerHTML = '<video src="' + url + '" controls></video><div class="gallery-title">' + caption + '</div>';
+            }
+
+            gallery.insertBefore(item, gallery.firstChild);
+            alert('Mídia postada com sucesso!');
+            
+            document.getElementById('media-url').value = '';
+            document.getElementById('media-caption').value = '';
+            toggleAdmin();
+        }
+    </script>
+</body>
+</html>
